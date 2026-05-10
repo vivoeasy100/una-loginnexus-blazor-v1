@@ -40,9 +40,12 @@ Para rodar o projeto localmente, siga os passos abaixo:
    ```
 
 5. **Acessar o portal**:
-   Abra seu navegador em `https://localhost:5001` (ou a porta indicada no terminal).
+   Abra seu navegador em `https://localhost:5053` (ou a porta indicada no terminal).
 
 ## 🖼️ Visual da Página de Login
+<img width="1373" height="775" alt="image" src="https://github.com/user-attachments/assets/9625a90e-85bb-4b58-8d4a-9001682c78ad" /><img width="1373" height="775" alt="image" src="https://github.com/user-attachments/assets/7d9456b3-dbf7-4f54-b803-1704ae112203" />
+
+
 
 Abaixo, uma representação visual do portal de acesso ao Nexus Acadêmico:
 
@@ -50,4 +53,5 @@ Abaixo, uma representação visual do portal de acesso ao Nexus Acadêmico:
 
 ---
 
-Desenvolvido por [Seu Nome/Equipe] | © 2026 Nexus Acadêmico
+Desenvolvido por Fernando | © 2026 Nexus Acadêmico
+
