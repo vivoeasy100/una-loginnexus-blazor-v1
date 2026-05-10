@@ -1,0 +1,68 @@
+@page "/login"
+@using LoginNexus.Services
+@using LoginNexus.Models
+@inject AuthService AuthService
+@inject NavigationManager Nav
+
+<div class="login-container">
+    <div class="login-card">
+        <h3>Nexus Acadêmico</h3>
+        <p>Acesse seu ecossistema de aprendizagem</p>
+
+        @* O EditForm precisa que 'loginModel' e 'HandleLogin' existam no @code *@
+        <EditForm Model="@loginModel" OnValidSubmit="HandleLogin">
+            <div class="form-group">
+                <label>E-mail Institucional</label>
+                <InputText @bind-Value="loginModel.Email" class="form-control" placeholder="usuario@nexus.edu" />
+            </div>
+
+            <div class="form-group">
+                <label>Senha</label>
+                <InputText @bind-Value="loginModel.Password" type="password" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Entrar no Portal</button>
+        </EditForm>
+        
+        @if (errorMessage != null)
+        {
+            <div class="alert alert-danger mt-3">@errorMessage</div>
+        }
+    </div>
+</div>
+
+@code {
+    // 1. Declarar o modelo que o formulário vai usar
+    private LoginRequest loginModel = new LoginRequest();
+    
+    // 2. Declarar a variável para mensagens de erro
+    private string? errorMessage;
+
+    // 3. Criar o método que processa o envio
+    private async Task HandleLogin()
+    {
+        errorMessage = null; // Reseta o erro a cada tentativa
+
+        var user = AuthService.Authenticate(loginModel.Email, loginModel.Password);
+
+        if (user != null)
+        {
+            // Dica de Sênior: Persistir o nome do usuário no LocalStorage
+            await AuthService.SaveUserPersistenceAsync(user.Name);
+
+            // Login com sucesso! Redireciona para a Home ou Dashboard
+            Nav.NavigateTo("/");
+        }
+        else
+        {
+            errorMessage = "E-mail ou senha inválidos. Tente novamente.";
+        }
+    }
+
+    // Classe auxiliar para capturar os dados do form
+    public class LoginRequest
+    {
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+    }
+}

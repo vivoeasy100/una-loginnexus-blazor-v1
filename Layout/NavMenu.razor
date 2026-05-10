@@ -1,0 +1,81 @@
+@using LoginNexus.Services
+@inject AuthService AuthService
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">LoginNexus</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        @if (!string.IsNullOrEmpty(userName))
+        {
+            <div class="user-profile px-3 py-2 text-white">
+                <small class="text-white-50">Bem-vindo,</small>
+                <div class="fw-bold">@userName</div>
+                <hr class="my-2 border-white-50" />
+            </div>
+        }
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="login">
+                <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> Acesso Nexus
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="dashboard">
+                <span class="bi bi-speedometer2-nav-menu" aria-hidden="true"></span> Dashboard
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="counter">
+                <span class="bi bi-journal-bookmark-fill-nav-menu" aria-hidden="true"></span> Minhas Turmas
+            </NavLink>
+        </div>
+        
+        @if (!string.IsNullOrEmpty(userName))
+        {
+            <div class="nav-item px-3 mt-4">
+                <button class="btn btn-link nav-link text-danger w-100 text-start" @onclick="HandleLogout">
+                    <span class="bi bi-box-arrow-right-nav-menu" aria-hidden="true"></span> Sair
+                </button>
+            </div>
+        }
+    </nav>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+    private string? userName;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        userName = await AuthService.GetPersistedUserNameAsync();
+    }
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    private async Task HandleLogout()
+    {
+        await AuthService.LogoutAsync();
+        userName = null;
+        // Opcional: Redirecionar para login
+    }
+}

@@ -1,0 +1,67 @@
+## [v1.0.0] Standard .NET GitIgnore
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ww][Ww]root/lib/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Pp]ublish/
+
+# Visual Studio 2015/2017/2019 cache/options directory
+.vs/
+# Uncomment if you use Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+*.sln.iml
+
+# Files built by Visual Studio
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*_h.h
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_prot
+*.log
+*.vsix
+*.vsixlog
+*.vsixdeblog
+*.associated-executable
+*.swp
+*.lock
+*.patch
+*.diff
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS metadata
+.DS_Store
+Thumbs.db
